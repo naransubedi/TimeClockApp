@@ -1,0 +1,33 @@
+<div class="shift-data">
+    <button (click)="viewAllShiftData()" class="btn btn-sm btn-primary" >View All Shift Data</button>
+</div>
+<div class="all-shift">
+    <div class="shift">
+        Your Available Shifts
+        <ul class="list-group">
+            <li *ngFor="let shift of shifts; index as i;" class="list-group-item d-flex justify-content-between align-items-center">
+             <div class="text-decoration-none">Shift {{shift.id}}</div>
+              <button [disabled]="shift.status=='Not-Active' || (isBreakStarted || isLunchStarted) || isShiftEnded" (click)="startShift(shift.id, i)" class="btn btn-sm btn-primary" #startEndShiftButton>Start Shift</button>
+              <div *ngIf="(i===checkIndex) && isShiftStarted">
+                <div class="alert alert-success shift-alert-message" role="alert">
+                    Your Shift is Started.
+                </div>
+                <div class="list-group">
+                    <a [disabled]="isBreakStarted" (click)="startBreak(shift.id, i)" class="list-group-item list-group-item-action" #startEndBreakButton>Start Your Break</a>
+                    <div *ngIf="isBreakStarted">
+                        <div class="alert alert-success shift-alert-message" role="alert">
+                            Your Break is Started.
+                        </div>
+                    </div>
+                    <a [disabled]="isLunchStarted" (click)="startLunch(shift.id, i)" class="list-group-item list-group-item-action" #startEndLunchButton>Start Your Lunch</a>
+                    <div *ngIf="isLunchStarted">
+                        <div class="alert alert-success shift-alert-message" role="alert">
+                            Your Lunch is Started.
+                        </div>
+                    </div>
+                </div>
+              </div>
+            </li>
+          </ul>
+    </div>
+</div>

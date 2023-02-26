@@ -1,0 +1,7 @@
+<form>
+    <div [formGroup] = "employeeCheckForm" class="form-group">
+      <label for="employeeId">Employee Id</label>
+      <input type="text" formControlName = "employeeId" class="form-control" id="employeeId" placeholder="Enter employee Id">
+    </div>
+    <button (click)="checkEmployeeWithId()" type="submit" class="btn btn-primary">Submit</button>
+  </form>
