@@ -1,22 +1,29 @@
-package com.example.time.clock.entity;
+package com.example.time.clock.app.entity;
 
 import java.util.Date;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "employee")
-public class Break {
-
+@Table(name = "tbl_lunch")
+public class Lunch {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(name = "start-date")
     private Date starDate;
+    @Column(name = "end-date")
     private Date endDate;
 
-    @ManyToOne
+    @OneToOne
+    @JoinColumn(name = "shift_id")
     private Shift shift;
 
     public Long getId() {
@@ -50,4 +57,6 @@ public class Break {
     public void setShift(Shift shift) {
         this.shift = shift;
     }
+
+    
 }

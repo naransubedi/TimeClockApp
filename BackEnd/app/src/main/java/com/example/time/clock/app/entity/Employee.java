@@ -1,8 +1,10 @@
-package com.example.time.clock.entity;
+package com.example.time.clock.app.entity;
 
 import java.util.List;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
@@ -11,12 +13,12 @@ import jakarta.persistence.Table;
 @Table(name = "employee")
 public class Employee {
     @Id
-    // @GeneratedValue(strategy = GenerationType.IDENTITT)
+    @GeneratedValue(strategy = GenerationType.IDENTITY) 
     private Long id;
     private String name;
     private String address;
 
-    @OneToMany
+    @OneToMany(mappedBy = "employee")
     private List<Shift> shifts;
 
     public Long getId() {
