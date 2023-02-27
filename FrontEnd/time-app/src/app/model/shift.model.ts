@@ -2,10 +2,11 @@ import { Break } from "./break.model";
 import { Lunch } from "./lunch.model";
 
 export interface Shift {
-    id: number;
+    shiftId: number;
+    employeeId: number
     status: string;
-    startDate: Date;
-    endDate: Date;
-    lunch: Lunch;
-    break: Break;
+    startDate: string;
+    endDate: string;
+    fromDate: string;
+    toDate: string;
 }

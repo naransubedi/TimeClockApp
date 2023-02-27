@@ -2,11 +2,11 @@
     <button (click)="viewAllShiftData()" class="btn btn-sm btn-primary" >View All Shift Data</button>
 </div>
 <div class="all-shift">
-    <div class="shift">
+    <div *ngIf="shifts.length > 0 ; else showNoShift" class="shift">
         Your Available Shifts
         <ul class="list-group">
             <li *ngFor="let shift of shifts; index as i;" class="list-group-item d-flex justify-content-between align-items-center">
-             <div class="text-decoration-none">Shift {{shift.id}}</div>
+             <div class="text-decoration-none">Shift {{shift.shiftId}}</div>
               <button [disabled]="shift.status=='Not-Active' || (isBreakStarted || isLunchStarted) || isShiftEnded" (click)="startShift(shift.id, i)" class="btn btn-sm btn-primary" #startEndShiftButton>Start Shift</button>
               <div *ngIf="(i===checkIndex) && isShiftStarted">
                 <div class="alert alert-success shift-alert-message" role="alert">
@@ -30,4 +30,5 @@
             </li>
           </ul>
     </div>
+    <ng-template #showNoShift>Currently you dont have any shift available.</ng-template>
 </div>

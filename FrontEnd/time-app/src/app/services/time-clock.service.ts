@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Shift } from '../model/shift.model';
 
@@ -10,59 +10,12 @@ export class TimeClockService {
   constructor(private http:HttpClient) { }
 
   getAllShiftForEmployeeId(employeeId:number){
-    const shifts:Shift[] = [
-      {
-        id: 1,
-        status: 'Active',
-        startDate: null,
-        endDate: null,
-        lunch: {
-          id: null,
-          startDate: null,
-          endDate: null
-        },
-        break: {
-          id: null,
-          startDate: null,
-          endDate: null
-        }
-      },
-      {
-        id: 2,
-        status: 'Not-Active',
-        startDate: null,
-        endDate: null,
-        lunch: {
-          id: null,
-          startDate: null,
-          endDate: null
-        },
-        break: {
-          id: null,
-          startDate: null,
-          endDate: null
-        }
-      },
-      {
-        id: 3,
-        status: 'Not-Active',
-        startDate: null,
-        endDate: null,
-        lunch: {
-          id: null,
-          startDate: null,
-          endDate: null
-        },
-        break: {
-          id: null,
-          startDate: null,
-          endDate: null
-        }
-      }
-
-    ]
-    return shifts;
-    // this.http.get()
+    const headers = new HttpHeaders({
+      'content-type': 'application/json',
+      'accept': 'application/json'
+    })
+    var response = this.http.get<Shift>('http://localhost:8080/api/v1/employees/'+employeeId + '/shifts');
+    return response;
   }
 
   shiftStartEnd(shiftId: number, startOrEnd:string){

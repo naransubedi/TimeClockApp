@@ -30,6 +30,16 @@ public class TimeClockService {
     @Autowired LunchDAO lunchDAO;
 
     public List<ShiftDTO> getAllShiftForEmployee(Long employeeId) throws ParseException{
+        List<ShiftDTO> shiftDtos = new ArrayList<>();
+
+        List<Shift> shifts = shiftDAO.findByEmployee(employeeDAO.findById(employeeId).get());
+
+        return shiftDtos;
+
+    }
+
+
+    public List<ShiftDTO> getTodaysShiftForEmployee(Long employeeId) throws ParseException{
 
         List<ShiftDTO> shiftDtos = new ArrayList<>();
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
@@ -46,8 +56,8 @@ public class TimeClockService {
 
         for(Shift shift : shifts){
             ShiftDTO shiftDto = new ShiftDTO();
-            shiftDto.setEmployeeId(employeeId);
-            shiftDto.setShiftId(shift.getId());
+            shiftDto.setEmployeeId(String.valueOf(employeeId));
+            shiftDto.setShiftId(String.valueOf(shift.getId()));
             shiftDto.setStatus(shift.getStatus());
             shiftDto.setFromDate(df.format(shift.getFromDate()));
             shiftDto.setToDate(df.format(shift.getToDate()));

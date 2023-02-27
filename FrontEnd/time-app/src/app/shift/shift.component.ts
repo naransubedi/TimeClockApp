@@ -26,7 +26,7 @@ export class ShiftComponent implements OnInit {
   isShiftEnded: boolean;
 
   employeeId: number;
-  shifts: Shift[];
+  shifts: any;
   checkIndex: number;
 
   constructor(private renderer : Renderer2, private router: Router, private timeClockService:TimeClockService, private shareDataService:ShareDataService) { }
@@ -35,7 +35,9 @@ export class ShiftComponent implements OnInit {
     this.isShiftStarted = false;
     this.isShiftEnded = false;
     this.shareDataService.empId.subscribe(employeeId => this.employeeId = employeeId);
-    this.shifts = this.timeClockService.getAllShiftForEmployeeId(this.employeeId);
+    this.shifts = this.timeClockService.getAllShiftForEmployeeId(this.employeeId).subscribe(data => {
+          this.shifts = data;
+      });
   }
 
   startShift(shiftId:number, indexNum:number){

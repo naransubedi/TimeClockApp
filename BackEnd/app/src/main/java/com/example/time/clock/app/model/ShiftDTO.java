@@ -1,23 +1,40 @@
 package com.example.time.clock.app.model;
 
+import java.util.List;
+
 public class ShiftDTO {
-    private Long shiftId;
-    private Long employeeId;
+    private String shiftId;
+    private String employeeId;
     private String starDate;
     private String endDate;
     private String fromDate;
     private String toDate;
     private String status;
-    public Long getShiftId() {
+    private List<BreakDTO> breaks;
+    private LunchDTO lunch;
+
+    public List<BreakDTO> getBreaks() {
+        return breaks;
+    }
+    public void setBreaks(List<BreakDTO> breaks) {
+        this.breaks = breaks;
+    }
+    public LunchDTO getLunch() {
+        return lunch;
+    }
+    public void setLunch(LunchDTO lunch) {
+        this.lunch = lunch;
+    }
+    public String getShiftId() {
         return shiftId;
     }
-    public void setShiftId(Long shiftId) {
+    public void setShiftId(String shiftId) {
         this.shiftId = shiftId;
     }
-    public Long getEmployeeId() {
+    public String getEmployeeId() {
         return employeeId;
     }
-    public void setEmployeeId(Long employeeId) {
+    public void setEmployeeId(String employeeId) {
         this.employeeId = employeeId;
     }
     public String getStarDate() {
