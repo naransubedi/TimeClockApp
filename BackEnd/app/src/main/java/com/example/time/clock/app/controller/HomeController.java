@@ -49,7 +49,7 @@ public class HomeController {
         return response;
     }
 
-    @PostMapping("/{shift-id}/start-end")
+    @PostMapping("/shifts/{shift-id}/start-end")
     public ResponseEntity<?> startEndShift(@PathVariable("shift-id") String shiftId, @RequestBody DateDTO dateDTO){
             ResponseEntity<?> response ;
             try {
@@ -61,7 +61,7 @@ public class HomeController {
         return response;
     }
 
-    @PostMapping("/{shift-id}/break/start-end")
+    @PostMapping("/shifts/{shift-id}/break/start-end")
     public ResponseEntity<?> startEndBreakForShift(@PathVariable("shift-id") String shiftId,
     @RequestBody DateDTO dateDTO){
         ResponseEntity<?> response ;
@@ -74,7 +74,7 @@ public class HomeController {
         return response;
     }
 
-    @PostMapping("/{shift-id}/lunch/start-end")
+    @PostMapping("/shifts/{shift-id}/lunch/start-end")
     public ResponseEntity<?> startEndLunchForShift(@PathVariable("shift-id") String shiftId, 
     @RequestBody DateDTO dateDTO){
         
@@ -88,7 +88,7 @@ public class HomeController {
         return response;        
     }
 
-    @PostMapping("/{employee-id}/assign/shift-end")
+    @PostMapping("/{employee-id}/assign/shift")
     public ResponseEntity<?> assignShiftForEmployee(@PathVariable("employee-id") String employeeId,
     @RequestBody DateDTO dateDTO
     ) throws ParseException {

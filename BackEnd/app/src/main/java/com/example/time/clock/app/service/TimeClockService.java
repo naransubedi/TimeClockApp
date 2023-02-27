@@ -19,6 +19,8 @@ import com.example.time.clock.app.dao.ShiftDAO;
 import com.example.time.clock.app.entity.Break;
 import com.example.time.clock.app.entity.Lunch;
 import com.example.time.clock.app.entity.Shift;
+import com.example.time.clock.app.model.BreakDTO;
+import com.example.time.clock.app.model.LunchDTO;
 import com.example.time.clock.app.model.ShiftDTO;
 
 @Service
@@ -31,13 +33,43 @@ public class TimeClockService {
 
     public List<ShiftDTO> getAllShiftForEmployee(Long employeeId) throws ParseException{
         List<ShiftDTO> shiftDtos = new ArrayList<>();
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 
-        List<Shift> shifts = shiftDAO.findByEmployee(employeeDAO.findById(employeeId).get());
+        List<Shift> shifts = shiftDAO.findByEmployee(employeeDAO.findById(employeeId).get()).stream()
+                            .filter(shift -> shift.getStatus().equals("Completed"))
+                            .collect(Collectors.toList());
+
+        for(Shift shift : shifts){
+            ShiftDTO shiftDto = new ShiftDTO();
+            shiftDto.setEmployeeId(String.valueOf(employeeId));
+            shiftDto.setShiftId(String.valueOf(shift.getId()));
+            shiftDto.setStatus(shift.getStatus());
+            shiftDto.setFromDate(df.format(shift.getFromDate()));
+            shiftDto.setToDate(df.format(shift.getToDate()));
+
+            LunchDTO lunchDto = new LunchDTO();
+            lunchDto.setLunchId(String.valueOf(shift.getLunch().getId()));
+            lunchDto.setStarDate(df.format(shift.getLunch().getStarDate()));
+            lunchDto.setEndDate(df.format(shift.getLunch().getEndDate()));
+
+            shiftDto.setLunch(lunchDto);
+            List<BreakDTO> breakDtos = new ArrayList<>();
+            for(Break b : shift.getBreaks()){
+                BreakDTO breakDto = new BreakDTO();
+                breakDto.setBreakId(String.valueOf(b.getId()));
+                breakDto.setStarDate(df.format(b.getStarDate()));
+                breakDto.setEndDate(df.format(b.getEndDate()));
+
+                breakDtos.add(breakDto);
+            }
+
+            shiftDto.setBreaks(breakDtos);
+
+            shiftDtos.add(shiftDto);
+        }
 
         return shiftDtos;
-
     }
-
 
     public List<ShiftDTO> getTodaysShiftForEmployee(Long employeeId) throws ParseException{
 
@@ -74,7 +106,7 @@ public class TimeClockService {
         Shift shift = shiftDAO.findById(shiftId).get();
         if(startDate == null){
             shift.setEndDate(endDate);
-            shift.setStatus("Not-Active");
+            shift.setStatus("Completed");
             shiftDAO.save(shift);    
         } else if(endDate == null){
             shift.setEndDate(endDate);
