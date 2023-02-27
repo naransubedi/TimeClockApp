@@ -10,6 +10,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AllShiftDataComponent } from './all-shift-data/all-shift-data.component';
 import { HttpClientModule} from '@angular/common/http';
 import { StartShiftComponent } from './shift/start-shift/start-shift.component';
+import { DatePipe } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,9 @@ import { StartShiftComponent } from './shift/start-shift/start-shift.component';
     NgbModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [
+    DatePipe
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

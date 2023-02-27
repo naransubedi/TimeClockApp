@@ -52,7 +52,9 @@ export class ShiftComponent implements OnInit {
         shiftEndButtonText
       );
       this.isShiftStarted = true;
-      this.timeClockService.shiftStartEnd(shiftId, shiftStartButtonText);
+      this.timeClockService.shiftStartEnd(shiftId, 'start').subscribe(data => {
+        console.log(data);
+      });
     }else if(element[0].nativeElement.innerHTML === shiftEndButtonText) {
       this.renderer.setProperty(
         element[0].nativeElement,
@@ -61,7 +63,9 @@ export class ShiftComponent implements OnInit {
       );
       this.isShiftStarted = false;
       this.isShiftEnded = true;
-      this.timeClockService.shiftStartEnd(shiftId, shiftEndButtonText);
+      this.timeClockService.shiftStartEnd(shiftId, 'end').subscribe(data => {
+        console.log(data);
+      });
     }
   }
 
@@ -73,7 +77,9 @@ export class ShiftComponent implements OnInit {
         "End Your Break"
       );
       this.isBreakStarted = true;
-      this.timeClockService.breakStartEnd(shiftId, 'start')
+      this.timeClockService.breakStartEnd(shiftId, 'start').subscribe(data => {
+        console.log(data);
+      });
     }else {
       this.renderer.setProperty(
         this.startEndBreaktButton.nativeElement,
@@ -81,7 +87,9 @@ export class ShiftComponent implements OnInit {
         "Start Your Break"
       );
       this.isBreakStarted = false;
-      this.timeClockService.breakStartEnd(shiftId, 'end')
+      this.timeClockService.breakStartEnd(shiftId, 'end').subscribe(data => {
+        console.log(data);
+      });
     }
   }
 
@@ -94,7 +102,9 @@ export class ShiftComponent implements OnInit {
       );
       
     this.isLunchStarted = true;
-    this.timeClockService.lunchStartEnd(shiftId, 'start');
+    this.timeClockService.lunchStartEnd(shiftId, 'start').subscribe(data => {
+      console.log(data);
+    });
     }else {
       this.renderer.setProperty(
         this.startEndLunchButton.nativeElement,
@@ -103,7 +113,9 @@ export class ShiftComponent implements OnInit {
       );
       
     this.isLunchStarted = false;
-    this.timeClockService.lunchStartEnd(shiftId, 'end');
+    this.timeClockService.lunchStartEnd(shiftId, 'end').subscribe(data => {
+      console.log(data);
+    });
     }
   }
 

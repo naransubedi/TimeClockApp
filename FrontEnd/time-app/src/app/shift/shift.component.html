@@ -13,13 +13,13 @@
                     Your Shift is Started.
                 </div>
                 <div class="list-group">
-                    <a [disabled]="isBreakStarted" (click)="startBreak(shift.id, i)" class="list-group-item list-group-item-action" #startEndBreakButton>Start Your Break</a>
+                    <a [disabled]="isBreakStarted" (click)="startBreak(shift.shiftId, i)" class="list-group-item list-group-item-action" #startEndBreakButton>Start Your Break</a>
                     <div *ngIf="isBreakStarted">
                         <div class="alert alert-success shift-alert-message" role="alert">
                             Your Break is Started.
                         </div>
                     </div>
-                    <a [disabled]="isLunchStarted" (click)="startLunch(shift.id, i)" class="list-group-item list-group-item-action" #startEndLunchButton>Start Your Lunch</a>
+                    <a [disabled]="isLunchStarted" (click)="startLunch(shift.shiftId, i)" class="list-group-item list-group-item-action" #startEndLunchButton>Start Your Lunch</a>
                     <div *ngIf="isLunchStarted">
                         <div class="alert alert-success shift-alert-message" role="alert">
                             Your Lunch is Started.

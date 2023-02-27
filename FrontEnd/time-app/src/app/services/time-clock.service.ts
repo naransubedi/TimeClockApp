@@ -20,7 +20,7 @@ export class TimeClockService {
   }
 
   shiftStartEnd(shiftId: number, startOrEnd:string){
-    const currentDate = this.datePipe.transform(new Date(), 'yyyy-MM-dd');
+    const currentDate = this.datePipe.transform(new Date(), 'yyyy-MM-dd hh:mm:ss');
     var postBody;
     if(startOrEnd === 'start'){
       postBody = {
@@ -34,12 +34,12 @@ export class TimeClockService {
       }
     }
 
-    this.http.post('http://localhost:8080/api/v1/shifts/' + shiftId + '/start-end' , postBody);
-    
+    var response = this.http.post('http://localhost:8080/api/v1/shifts/' + shiftId + '/start-end' , postBody);
+    return response;
   }
 
   breakStartEnd(shiftId: number, startOrEnd:string){
-    const currentDate = this.datePipe.transform(new Date(), 'yyyy-MM-dd');
+    const currentDate = this.datePipe.transform(new Date(), 'yyyy-MM-dd hh:mm:ss');
     var postBody;
     if(startOrEnd === 'start'){
       postBody = {
@@ -53,12 +53,12 @@ export class TimeClockService {
       }
     }
 
-    this.http.post('http://localhost:8080/api/v1/shifts/' + shiftId + '/break/start-end' , postBody);
-
+    var response = this.http.post('http://localhost:8080/api/v1/shifts/' + shiftId + '/break/start-end' , postBody);
+    return response;
   }
 
   lunchStartEnd(shiftId: number, startOrEnd:string){
-    const currentDate = this.datePipe.transform(new Date(), 'yyyy-MM-dd');
+    const currentDate = this.datePipe.transform(new Date(), 'yyyy-MM-dd hh:mm:ss');
     var postBody;
     if(startOrEnd === 'start'){
       postBody = {
@@ -71,7 +71,9 @@ export class TimeClockService {
         endDate: currentDate
       }
     }
-    this.http.post('http://localhost:8080/api/v1/shifts/' + shiftId + '/lunch/start-end' , postBody);
+
+    var response = this.http.post('http://localhost:8080/api/v1/shifts/' + shiftId + '/lunch/start-end' , postBody);
+    return response;
   }
 
   getAllShiftData(employeeId:number){
